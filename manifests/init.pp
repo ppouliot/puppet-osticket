@@ -37,10 +37,6 @@
 #
 class osticket {
 
-
-}
-
-
 #Lamp Stack Install Steps, 
 #2.	sudo apt-get install apache2
 #3.	sudo /etc/init.d/apache2 start
@@ -67,3 +63,5 @@ class osticket {
 #21.	Answered installation questions
 #22.	Chmod 644 /var/www/support/incude/ost-conf.php
 #23.	Rm –rf /var/www/support/setup
+
+}
