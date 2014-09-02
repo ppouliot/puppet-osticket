@@ -1,0 +1,17 @@
+{
+  "name": "puppet-osticket",
+  "version": "0.1.0",
+  "author": "Celso Silva",
+  "summary": "Installs OsTicket on Ubuntu 14.04 LTS",
+  "license": "Apache 2.0",
+  "source": "https://github.com/megatron3000/puppet-osticket",
+  "project_page": "https://github.com/megatron3000/puppet-osticket",
+  "issues_url": "https://github.com/megatron3000/puppet-osticket/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_range": ">= 1.0.0"
+    }
+  ]
+}
+
