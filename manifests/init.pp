@@ -49,6 +49,13 @@ class osticket {
 #10.SET PASSWORD FOR root@localhost = Ubuntu
 #11.Sudo /etc/init.d/mysql start
 
+  class{'apache':
+    default_vhost => true,
+    mpm_module => prefork,
+    service_enable => true,
+    service_ensure => running,
+  }
+  class {'apache::mod::php':}
 
   apache::vhost {'osticket':
     priority => '10',
@@ -56,22 +63,43 @@ class osticket {
     port => 80,
     docroot => '/var/www/html/osticket',
     logroot => '/var/log/osticket',
+	require => Vcsrepo['/var/www/html/osticket'],
   }
-  include apache::mod::php
+  
+  class{'mysql::server':
+    root_password => 'ubuntu',
+  }
 
-  mysql::Db { 'osticket':
+  mysql::db { 'osticket':
     user => 'root',
     password => 'ubuntu',
     host => 'localhost',
     grant => ['CREATE','INSERT','SELECT','DELETE','UPDATE'],
     require => Class['mysql::Server'],
   }
+  
+  
 #Osticket Install steps,
 #12.	sudo mkdir /var/www/support.
 #13.	git clone https://github.com/osTicket/osTicket-1.8/archive/v1.8.5.tar.gz
 #14.	sudo tar xvzf osticket_v1.8.5.tar.gz     
 #15.	Moved all of the files from the /var/www/support/osticket_v1.8.5.tar.gz 
 #16.	sudo mv /var/www/osticket_v1.8.5.tar.gz /var/www/support/osticket_v1.8.5.tar.gz
+
+  vcsrepo { '/var/www/html/osticket/':
+    ensure   => present,
+    provider => git,
+    source   => 'https://github.com/osTicket/osTicket-1.8'
+  }
+  
+  file {'/var/www/html/osticket/include/ost-config':
+    ensure  => file,
+	source  => '/var/www/html/osticket/include/ost-config.sample.php',
+	mode    => '0644',
+	require => Vcsrepo['/var/www/html/osticket'],
+  }
+  
+  
 #17.	Renamed the file ost-config.sample.php 
 #18.	sudo mv /var/www/support/include/ost-config.sample.php /var/www/support/include/ost-config.php.
 #19.	sudo chmod 777 /var/www/support/include/ost-config.php.
