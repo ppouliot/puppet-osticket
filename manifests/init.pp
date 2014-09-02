@@ -50,6 +50,22 @@ class osticket {
 #11.Sudo /etc/init.d/mysql start
 
 
+  apache::vhost {'osticket':
+    priority => '10',
+    vhost_name => $::ipaddress,
+    port => 80,
+    docroot => '/var/www/html/osticket',
+    logroot => '/var/log/osticket',
+  }
+  include apache::mod::php
+
+  mysql::Db { 'osticket':
+    user => 'root',
+    password => 'ubuntu',
+    host => 'localhost',
+    grant => ['CREATE','INSERT','SELECT','DELETE','UPDATE'],
+    require => Class['mysql::Server'],
+  }
 #Osticket Install steps,
 #12.	sudo mkdir /var/www/support.
 #13.	git clone https://github.com/osTicket/osTicket-1.8/archive/v1.8.5.tar.gz
