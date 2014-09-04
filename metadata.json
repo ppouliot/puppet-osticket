@@ -11,5 +11,5 @@
     { "name": "puppetlabs/stdlib", "version_requirement": ">= 1.0.0" },
     { "name": "puppetlabs/mysql", "version_requirement": ">= 1.x" },
     { "name": "saz/php", "version_requirement": ">= 1.1.0" },
-  ]
+ ]
 }
