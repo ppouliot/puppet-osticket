@@ -3,8 +3,8 @@
 #
 
 class osticket::params {
-  $ost_dir         = '/usr/local/src/osTicket'
-  $ost_install_dir = '/var/www/html/support'
+  $ost_dir             = '/usr/local/src/osTicket'
+  $ost_install_dir     = '/var/www/html/support'
   $ost_db_name         = 'osticket'
   $ost_db_user         = 'osticket'
   $ost_db_passwd       = 'osticket'
