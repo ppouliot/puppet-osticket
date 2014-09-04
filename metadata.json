@@ -9,7 +9,7 @@
   "issues_url": "https://github.com/openstack-hyper-v/puppet-osticket/issues",
   "dependencies": [
     { "name": "puppetlabs/stdlib", "version_requirement": ">= 1.0.0" },
-    { "name": "puppetlabs/mysql", "version_requirement": ">= 1.x" },
+    { "name": "puppetlabs/mysql", "version_requirement": ">= 1.1.1" },
     { "name": "saz/php", "version_requirement": ">= 1.1.0" },
  ]
 }
