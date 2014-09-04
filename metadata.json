@@ -7,20 +7,10 @@
   "source": "https://github.com/openstack-hyper-v/puppet-osticket",
   "project_page": "https://github.com/openstack-hyper-v/puppet-osticket",
   "issues_url": "https://github.com/openstack-hyper-v/puppet-osticket/issues",
-  "operatingsystem_support": [
-    {
-    "operatingsystem":"RedHat",
-    "operatingsystemrelease":[ "5.0", "6.0", "7.0" ]
-    },
-    {
-    "operatingsystem": "Ubuntu",
-    "operatingsystemrelease": [ "12.04", "14.04" ]
-    }
-   ]
   "dependencies": [
-    { "name": "puppetlabs/stdlib", "version_range": ">= 1.0.0" },
-    { "name": "puppetlabs/mysql", "version_range": ">= 1.x" },
-    { "name": "saz/php", "version_range": ">= 1.1.0" },
+    { "name": "puppetlabs/stdlib", "version_requirement": ">= 1.0.0" },
+    { "name": "puppetlabs/mysql", "version_requirement": ">= 1.x" },
+    { "name": "saz/php", "version_requirement": ">= 1.1.0" },
   ]
 }
 
