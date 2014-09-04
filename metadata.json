@@ -1,5 +1,5 @@
 {
-  "name": "puppet-osticket",
+  "name": "osticket",
   "version": "0.1.0",
   "author": "Peter J. Pouliot",
   "summary": "Installs OsTicket on Ubuntu 14.04 LTS",
