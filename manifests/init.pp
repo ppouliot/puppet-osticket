@@ -110,12 +110,12 @@ class osticket (
     logoutput   => true,
   }
 
-  file {"${ost_install_dir}/include/ost-sampleconfig.php":
-    ensure  => absent,
-    require => File["${ost_install_dir}/include/ost-config.php"],
-  }
-  file {"${ost_install_dir}/setup":
-    ensure  => absent,
-    require => File["${ost_install_dir}/include/ost-config.php"],
-  }
+#  file {"${ost_install_dir}/include/ost-sampleconfig.php":
+#    ensure  => absent,
+#    require => File["${ost_install_dir}/include/ost-config.php"],
+#  }
+#  file {"${ost_install_dir}/setup":
+#    ensure  => absent,
+#    require => File["${ost_install_dir}/include/ost-config.php"],
+#  }
 }
