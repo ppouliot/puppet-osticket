@@ -6,7 +6,7 @@
 #
 # === Variables
 #
-# Currently this Class consumes the following variables. 
+# Currently this Class consumes the following variables.
 #
 # [*ost_dir*]
 #   The directory which contains the source code for osTicket
@@ -15,7 +15,7 @@
 # [*ost_db_user*]
 #  The username used for the osTicket database connections
 # [*ost_db_password*]
-#   The password used to authenticate the $ost_db_user to the osTicket database
+#   The password used to authenticate the ost_db_user to the osTicket database
 # [*ost_db_name*]
 #   The name of the database osTicket will connect to.
 # [*ost_db_host*]
@@ -41,8 +41,8 @@ class osticket (
   $ost_db_passwd   = $osticket::params::ost_db_passwd,
   $ost_db_host     = $osticket::params::ost_db_host,
   $ost_src_url     = $osticket::params::ost_src_url,
-  $osticket_admin       = $osticket::params::ost_admin_email
-) inherits osticket::params {
+  $osticket_admin  = $osticket::params::ost_admin_email
+) inherits params {
 
   php::module{['imap','gd',]:
     notify => [Service['apache2'],Exec['enable-php5-imap']],
@@ -54,22 +54,22 @@ class osticket (
   }
 
   class{'apache':
-    default_vhost => true,
-    mpm_module => prefork,
+    default_vhost  => true,
+    mpm_module     => prefork,
     service_enable => true,
     service_ensure => running,
   }
   class {'apache::mod::php':}
 
   apache::vhost {'osTicket':
-    priority => '10',
+    priority   => '10',
     vhost_name => $::ipaddress,
-    port => 80,
-    docroot => $ost_install_dir,
-    logroot => "/var/log/${module_name}",
-    require => Vcsrepo[$ost_dir],
+    port       => 80,
+    docroot    => $ost_install_dir,
+    logroot    => "/var/log/${module_name}",
+    require    => Vcsrepo[$ost_dir],
   }
-  
+
   class { 'mysql::server':
     config_hash => { 'root_password' => $ost_db_passwd }
   }
@@ -80,7 +80,7 @@ class osticket (
     host     => $ost_db_host,
     grant    => ['all'],
   }
-  
+
   vcsrepo { $ost_dir:
     ensure   => present,
     provider => git,
@@ -88,9 +88,9 @@ class osticket (
     require  => Package['php5-gd'],
     owner    => 'www-data',
     group    => 'www-data',
-    notify  => Exec['Run-OsTicket-Setup'],
+    notify   => Exec['Run-OsTicket-Setup'],
   }
-  
+
 #  file {"${ost_dir}/include/ost-config.php":
   file {"${ost_install_dir}/include/ost-config.php":
     ensure  => file,
@@ -106,7 +106,7 @@ class osticket (
     cwd         => $ost_dir,
     refreshonly => true,
 #    require     => File["${ost_dir}/include/ost-sampleconfig.php"],
-    require => [ Apache::Vhost['osTicket'], Vcsrepo[$ost_dir]],
+    require     => [ Apache::Vhost['osTicket'], Vcsrepo[$ost_dir]],
     logoutput   => true,
   }
 
@@ -118,7 +118,4 @@ class osticket (
     ensure  => absent,
     require => File["${ost_install_dir}/include/ost-config.php"],
   }
-  
-  
-
 }

@@ -8,8 +8,8 @@ class osticket::params {
   $ost_db_name         = 'osticket'
   $ost_db_user         = 'osticket'
   $ost_db_passwd       = 'osticket'
-  $ost_db_host         = '127.0.0.1'  
+  $ost_db_host         = '127.0.0.1'
   $ost_version         = '1.8'
   $ost_src_url         = "https://github.com/osTicket/osTicket-${ost_version}"
-  $ost_admin_email     = "root@${fqdn}"
+  $ost_admin_email     = "root@${::fqdn}"
 }
