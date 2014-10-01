@@ -71,7 +71,7 @@ class osticket (
   }
 
   class { 'mysql::server':
-    'root_password' => $ost_db_passwd,
+    root_password => $ost_db_passwd,
   }
 
 #  mysql::db { $ost_db_name:
