@@ -71,15 +71,15 @@ class osticket (
   }
 
   class { 'mysql::server':
-    config_hash => { 'root_password' => $ost_db_passwd }
+    'root_password' => $ost_db_passwd,
   }
 
-  mysql::db { $ost_db_name:
-    user     => $ost_db_user,
-    password => $ost_db_passwd,
-    host     => $ost_db_host,
-    grant    => ['all'],
-  }
+#  mysql::db { $ost_db_name:
+#    user     => $ost_db_user,
+#    password => $ost_db_passwd,
+#    host     => $ost_db_host,
+#    grant    => ['all'],
+#  }
 
   vcsrepo { $ost_dir:
     ensure   => present,
