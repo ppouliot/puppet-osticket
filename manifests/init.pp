@@ -97,7 +97,7 @@ class osticket (
     content => template("${module_name}/ost-config.php.erb"),
     mode    => '0655',
     require => Apache::Vhost['osTicket'],
-#    notify  => Exec['Run-OsTicket-Setup'],
+    notify  => Exec['Run-OsTicket-Setup'],
   }
 
   exec {'Run-OsTicket-Setup':
@@ -110,12 +110,12 @@ class osticket (
     logoutput   => true,
   }
 
-#  file {"${ost_install_dir}/include/ost-sampleconfig.php":
-#    ensure  => absent,
-#    require => File["${ost_install_dir}/include/ost-config.php"],
-#  }
-#  file {"${ost_install_dir}/setup":
-#    ensure  => absent,
-#    require => File["${ost_install_dir}/include/ost-config.php"],
-#  }
+  file {"${ost_install_dir}/include/ost-sampleconfig.php":
+    ensure  => absent,
+    require => File["${ost_install_dir}/include/ost-config.php"],
+  }
+  file {"${ost_install_dir}/setup":
+    ensure  => absent,
+    require => File["${ost_install_dir}/include/ost-config.php"],
+  }
 }
