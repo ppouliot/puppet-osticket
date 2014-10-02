@@ -44,7 +44,7 @@ class osticket (
   $osticket_admin  = $osticket::params::ost_admin_email
 ) inherits params {
 
-  php::module{['imap','gd',]:
+  php::module{['imap','gd','mysql',]:
     notify => [Service['apache2'],Exec['enable-php5-imap']],
   }
   exec {'enable-php5-imap':
@@ -110,12 +110,12 @@ class osticket (
     logoutput   => true,
   }
 
-  file {"${ost_install_dir}/include/ost-sampleconfig.php":
-    ensure  => absent,
-    require => File["${ost_install_dir}/include/ost-config.php"],
-  }
-  file {"${ost_install_dir}/setup":
-    ensure  => absent,
-    require => File["${ost_install_dir}/include/ost-config.php"],
-  }
+#  file {"${ost_install_dir}/include/ost-sampleconfig.php":
+#    ensure  => absent,
+#    require => File["${ost_install_dir}/include/ost-config.php"],
+#  }
+#  file {"${ost_install_dir}/setup":
+#    ensure  => absent,
+#    require => File["${ost_install_dir}/include/ost-config.php"],
+#  }
 }
