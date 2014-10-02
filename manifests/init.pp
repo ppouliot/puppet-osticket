@@ -88,7 +88,7 @@ class osticket (
     require  => Package['php5-gd'],
     owner    => 'www-data',
     group    => 'www-data',
-    notify   => Exec['Run-OsTicket-Setup'],
+#    notify   => Exec['Run-OsTicket-Setup'],
   }
 
 #  file {"${ost_dir}/include/ost-config.php":
@@ -96,8 +96,8 @@ class osticket (
     ensure  => file,
     content => template("${module_name}/ost-config.php.erb"),
     mode    => '0655',
-    require => Apache::Vhost['osTicket'],
-#    notify  => Exec['Run-OsTicket-Setup'],
+    require => Vcsrepo[$ost_dir],
+    notify  => Exec['Run-OsTicket-Setup'],
   }
 
   exec {'Run-OsTicket-Setup':
