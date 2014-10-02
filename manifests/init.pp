@@ -97,7 +97,7 @@ class osticket (
     content => template("${module_name}/ost-config.php.erb"),
     mode    => '0655',
     require => Apache::Vhost['osTicket'],
-    notify  => Exec['Run-OsTicket-Setup'],
+#    notify  => Exec['Run-OsTicket-Setup'],
   }
 
   exec {'Run-OsTicket-Setup':
