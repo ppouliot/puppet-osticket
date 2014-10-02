@@ -46,14 +46,14 @@ if(OSTINSTALLED!=TRUE){
 define('SECRET_SALT','UCVTQSFAzlWQ9utzhIUzqhySBpPTX3Zr');
 
 #Default admin email. Used only on db connection issues and related alerts.
-define('ADMIN_EMAIL','<%=@osticket_admin%>');
+define('ADMIN_EMAIL','<%=@ost_admin_email%>');
 
 #Mysql Login info
 define('DBTYPE','mysql');
-define('DBHOST','<%=@osticket_db_host %>');
-define('DBNAME','<%=@osticket_db_name %>');
-define('DBUSER','<%=@osticket_db_user %>');
-define('DBPASS','<%=@osticket_db_passwd %>');
+define('DBHOST','<%=@ost_db_host %>');
+define('DBNAME','<%=@ost_db_name %>');
+define('DBUSER','<%=@ost_db_user %>');
+define('DBPASS','<%=@ost_db_passwd %>');
 
 # SSL Options
 # ---------------------------------------------------
