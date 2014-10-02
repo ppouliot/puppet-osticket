@@ -91,8 +91,8 @@ class osticket (
 #    notify   => Exec['Run-OsTicket-Setup'],
   }
 
-#  file {"${ost_dir}/include/ost-config.php":
-  file {"${ost_install_dir}/include/ost-config.php":
+  file {"${ost_dir}/include/ost-config.php":
+#  file {"${ost_install_dir}/include/ost-config.php":
     ensure  => file,
     content => template("${module_name}/ost-config.php.erb"),
     mode    => '0655',
