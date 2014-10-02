@@ -96,8 +96,9 @@ class osticket (
     ensure  => file,
     content => template("${module_name}/ost-config.php.erb"),
     mode    => '0666',
-    require => Vcsrepo[$ost_dir],
-    notify  => Exec['Run-OsTicket-Setup'],
+#    require => Vcsrepo[$ost_dir],
+#    notify  => Exec['Run-OsTicket-Setup'],
+    require  => Exec['Run-OsTicket-Setup'],
   }
 
   exec {'Run-OsTicket-Setup':
