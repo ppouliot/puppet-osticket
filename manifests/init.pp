@@ -88,7 +88,7 @@ class osticket (
     require  => Package['php5-gd'],
     owner    => 'www-data',
     group    => 'www-data',
-#    notify   => Exec['Run-OsTicket-Setup'],
+    notify   => Exec['Run-OsTicket-Setup'],
   }
 
 #  file {"${ost_dir}/include/ost-config.php":
