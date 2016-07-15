@@ -8,6 +8,8 @@
 #
 # Currently this Class consumes the following variables.
 #
+# [*ost_version*]
+#   The version of osTicket to use
 # [*ost_dir*]
 #   The directory which contains the source code for osTicket
 # [*ost_install_dir*]
@@ -34,7 +36,8 @@
 # Copyright 2014 Peter J. Pouliot <peter@pouliot.net>, unless otherwise noted.
 #
 class osticket (
-  $ost_dir   = $osticket::params::ost_dir,
+  $ost_version     = $osticket::params::ost_version,
+  $ost_dir         = $osticket::params::ost_dir,
   $ost_install_dir = $osticket::params::ost_install_dir,
   $ost_db_name     = $osticket::params::ost_db_name,
   $ost_db_user     = $osticket::params::ost_db_user,
@@ -67,7 +70,7 @@ class osticket (
     port       => 80,
     docroot    => $ost_install_dir,
     logroot    => "/var/log/${module_name}",
-    require    => Vcsrepo[$ost_dir],
+    require    => Vcsrepo[$osticket::ost_dir],
   }
 
   class { 'mysql::server':
@@ -81,10 +84,11 @@ class osticket (
     grant    => ['all'],
   }
 
-  vcsrepo { $ost_dir:
+  vcsrepo { $osticket::ost_dir:
     ensure   => present,
     provider => git,
-    source   => $ost_src_url,
+    source   => $osticket::ost_src_url,
+    revision => $osticket::ost_version
     require  => Package['php5-gd'],
     owner    => 'www-data',
     group    => 'www-data',
@@ -92,7 +96,7 @@ class osticket (
   }
 
 #  file {"${ost_dir}/include/ost-config.php":
-  file {"${ost_install_dir}/include/ost-config.php":
+  file {"${osticket::ost_install_dir}/include/ost-config.php":
     ensure  => file,
     content => template("${module_name}/ost-config.php.erb"),
     mode    => '0666',
@@ -107,16 +111,16 @@ class osticket (
     cwd         => $ost_dir,
     refreshonly => true,
 #    require     => File["${ost_dir}/include/ost-sampleconfig.php"],
-    require     => [ Apache::Vhost['osTicket'], Vcsrepo[$ost_dir]],
+    require     => [ Apache::Vhost['osTicket'], Vcsrepo[$osticket::ost_dir]],
     logoutput   => true,
   }
 
-#  file {"${ost_install_dir}/include/ost-sampleconfig.php":
+#  file {"${osticket::ost_install_dir}/include/ost-sampleconfig.php":
 #    ensure  => absent,
-#    require => File["${ost_install_dir}/include/ost-config.php"],
+#    require => File["${osticket::ost_install_dir}/include/ost-config.php"],
 #  }
-#  file {"${ost_install_dir}/setup":
+#  file {"${osticket::ost_install_dir}/setup":
 #    ensure  => absent,
-#    require => File["${ost_install_dir}/include/ost-config.php"],
+#    require => File["${osticket::ost_install_dir}/include/ost-config.php"],
 #  }
 }
