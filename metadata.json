@@ -14,7 +14,15 @@
    },
    {
      "name": "puppetlabs/mysql",
-     "version_requirement": ">= 1.1.1"
+     "version_requirement": ">= 3.6.2"
+   },
+   {
+     "name": "puppetlabs/apache",
+     "version_requirement": ">= 1.8.1"
+   },
+   {
+     "name": "puppetlabs/vcsrepo",
+     "version_requirement": ">= 1.3.2"
    },
    {
      "name": "saz/php",
