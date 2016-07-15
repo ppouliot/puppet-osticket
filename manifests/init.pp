@@ -88,7 +88,7 @@ class osticket (
     ensure   => present,
     provider => git,
     source   => $osticket::ost_src_url,
-    revision => $osticket::ost_version
+    revision => $osticket::ost_version,
     require  => Package['php5-gd'],
     owner    => 'www-data',
     group    => 'www-data',
