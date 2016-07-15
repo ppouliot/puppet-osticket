@@ -1,6 +1,7 @@
 FROM msopenstack/sentinel-debian:latest
  
-RUN yum update -y
+RUN apt-get update -y
+RUN apt-get install software-properties-common -y
 RUN puppet module install puppetlabs-stdlib
 RUN puppet module install puppetlabs-apache
 RUN puppet module install puppetlabs-mysql
